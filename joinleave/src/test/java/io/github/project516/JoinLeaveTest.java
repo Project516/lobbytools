@@ -2,7 +2,7 @@ package io.github.project516;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.PlayerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.junit.jupiter.api.AfterEach;
@@ -13,12 +13,13 @@ class JoinLeaveTest {
 
     World world;
     ServerMock server;
+    private JoinLeave plugin;
 
     @BeforeEach
     void setUp() {
         server = MockBukkit.mock();
-        joinleave plugin = MockBukkit.load(joinleave.class);
-        this.world = mock.addSimpleWorld("test");
+        plugin = MockBukkit.load(JoinLeave.class);
+        this.world = server.addSimpleWorld("test");
     }
 
     @AfterEach
