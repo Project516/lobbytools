@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class joinleave extends JavaPlugin implements Listener {
+public class JoinLeave extends JavaPlugin implements Listener {
   
   @Override
   public void onEnable() {
