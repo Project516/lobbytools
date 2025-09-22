@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id("com.diffplug.spotless") version "7.2.1"
 }
 
 repositories {
@@ -14,9 +15,15 @@ dependencies {
   compileOnly 'io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT'
   testImplementation 'org.mockbukkit.mockbukkit:mockbukkit-v1.21:4.0.0'
   testImplementation 'org.junit.jupiter:junit-jupiter:5.11.0'
-  implementation 'com.google.googlejavaformat:google-java-format:1.28.0'
 }
 
 test {
     useJUnitPlatform()
+}
+
+spotless {
+    java {
+        googleJavaFormat('1.28.0').aosp()
+        target 'src/**/*.java'
+    }
 }
