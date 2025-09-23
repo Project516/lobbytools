@@ -3,6 +3,12 @@ plugins {
     id("com.diffplug.spotless") version "7.2.1"
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
 repositories {
   mavenCentral()
   maven {
@@ -13,8 +19,6 @@ repositories {
 
 dependencies {
   compileOnly 'io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT'
-  testImplementation 'org.mockbukkit.mockbukkit:mockbukkit-v1.21:4.0.0'
-  testImplementation 'org.junit.jupiter:junit-jupiter:5.11.0'
 }
 
 test {
@@ -23,7 +27,7 @@ test {
 
 spotless {
     java {
-        googleJavaFormat('1.28.0').aosp()
+        googleJavaFormat('1.17.0').aosp()
         target 'src/**/*.java'
     }
 }
