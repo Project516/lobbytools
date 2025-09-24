@@ -4,4 +4,4 @@ cd joinleave
 ./gradlew :spotlessApply
 ./gradlew build
 cd ..
-cp joinleave/build/libs/joinleave.jar build/joinleave.jar
+cp joinleave/build/libs/joinleave.jar builds/joinleave.jar
