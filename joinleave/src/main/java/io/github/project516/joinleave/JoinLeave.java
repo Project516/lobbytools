@@ -1,4 +1,4 @@
-package io.github.project516;
+package io.github.project516.joinleave;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
