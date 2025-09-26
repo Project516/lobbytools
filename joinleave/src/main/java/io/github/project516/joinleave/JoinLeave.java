@@ -23,18 +23,7 @@ public class JoinLeave extends JavaPlugin implements Listener {
                         .color(NamedTextColor.YELLOW)
                         .build();
 
-        Bukkit.broadcast(joinMessage);
-
-        // Send a private welcome message to the joining player
-        event.getPlayer()
-                .sendMessage(
-                        Component.text()
-                                .append(Component.text("Welcome to the server, "))
-                                .append(Component.text(event.getPlayer().getName()))
-                                .append(Component.text("!"))
-                                .color(NamedTextColor.AQUA)
-                                .build());
-    }
+        event.joinMessage(joinMessage);
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
@@ -48,6 +37,6 @@ public class JoinLeave extends JavaPlugin implements Listener {
                         .color(NamedTextColor.YELLOW)
                         .build();
 
-        Bukkit.broadcast(leaveMessage);
+        event.joinMessage(leaveMessage);
     }
 }
