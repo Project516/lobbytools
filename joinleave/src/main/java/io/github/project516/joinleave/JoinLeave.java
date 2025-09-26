@@ -13,6 +13,11 @@ public class JoinLeave extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(this, this);
     }
 
+    @Override
+    public void onDisable() {
+        // Shutdown
+    }
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         event.getPlayer()
