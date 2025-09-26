@@ -3,22 +3,20 @@ plugins {
     id("com.diffplug.spotless") version "8.0.0"
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-
 repositories {
   mavenCentral()
   maven {
-    name = 'papermc'
-    url = 'https://repo.papermc.io/repository/maven-public/'
+    name = "papermc"
+    url = uri("https://repo.papermc.io/repository/maven-public/")
   }
 }
 
 dependencies {
-  compileOnly 'io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT'
+  compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
+}
+
+java {
+  toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 test {
