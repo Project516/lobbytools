@@ -11,6 +11,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class JoinLeave extends JavaPlugin implements Listener {
 
+    @Override
+    public void onEnable() {
+        getServer().getPluginManager().registerEvents(this, this);
+    }
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         // Broadcast a join message to all players
