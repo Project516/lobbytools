@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class JoinLeave extends JavaPlugin {
     @Override
     public void onEnable() {
-        Bukkit.getPluginManager().registerEvents(new events(), this);
+        Bukkit.getPluginManager().registerEvents(new playerListener(), this);
     }
 
     @Override
