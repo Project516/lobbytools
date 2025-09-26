@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class events implements Listener {
 
@@ -11,5 +12,11 @@ public class events implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         event.getPlayer()
                 .sendMessage(Component.text("Welcome, " + event.getPlayer().getName() + "!"));
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        event.getPlayer()
+                .sendMessage(Component.text("Goodbye, " + event.getPlayer().getName() + "!"));
     }
 }
