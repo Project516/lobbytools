@@ -23,7 +23,7 @@ public class JoinLeave extends JavaPlugin implements Listener {
                         .color(NamedTextColor.YELLOW)
                         .build();
 
-        event.joinMessage(joinMessage);
+        event.setJoinMessage(joinMessage);
     }
 
     @EventHandler
@@ -38,6 +38,6 @@ public class JoinLeave extends JavaPlugin implements Listener {
                         .color(NamedTextColor.YELLOW)
                         .build();
 
-        event.leaveMessage(leaveMessage);
+        event.setQuitMessage(leaveMessage);
     }
 }
