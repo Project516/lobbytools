@@ -12,15 +12,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class JoinLeave extends JavaPlugin implements Listener {
 
     @Override
-    public void onEnable() {
-        Bukkit.getPluginManager().registerEvents(this, this);
-        getLogger().info("JoinLeave plugin has been enabled!");
-    }
-
-    @Override
-    public void onDisable() {
-        getLogger().info("JoinLeave plugin has been disabled!");
-    }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
