@@ -24,6 +24,7 @@ public class JoinLeave extends JavaPlugin implements Listener {
                         .build();
 
         event.joinMessage(joinMessage);
+    }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
