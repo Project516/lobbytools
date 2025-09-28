@@ -23,6 +23,7 @@ test {
     useJUnitPlatform()
 }
 
+compileJava.dependsOn spotlessApply
 spotless {
     java {
         googleJavaFormat('1.17.0').aosp()
