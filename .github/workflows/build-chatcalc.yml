@@ -1,0 +1,28 @@
+name: Build ChatCalc
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v5
+    
+    - name: Set up JDK 21
+      uses: actions/setup-java@v5
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+    
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      working-directory: ./chatcalc
+    
+    - name: Build with Gradle
+      run: ./gradlew build
+      working-directory: ./chatcalc
