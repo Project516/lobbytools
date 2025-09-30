@@ -1,4 +1,3 @@
 rootProject.name = 'lobbytools'
 
-include 'chatcalc'
 include 'joinleave'
