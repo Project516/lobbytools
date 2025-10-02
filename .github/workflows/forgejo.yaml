@@ -1,0 +1,91 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew build --no-daemon
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: gradle-build
+          path: build/libs/**/*.jar
+
+      - name: Generate timestamp tag and release title
+        id: time_tag
+        run: |
+          TAG_RAW=$(date -u +'%H-%M-%S-%d.%m.%Y')
+          TAG_NAME="release-$TAG_RAW"
+          RELEASE_TITLE="Automated Release - $(date -u +'%H:%M:%S on %d.%m.%Y')"
+          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+          echo "release_title=$RELEASE_TITLE" >> $GITHUB_OUTPUT
+
+      - name: Create Git tag and push
+        run: |
+          git config user.name "forgejo-actions[bot]"
+          git config user.email "forgejo-actions[bot]@sbmc.dev"
+          git tag ${{ steps.time_tag.outputs.tag_name }}
+          git push origin ${{ steps.time_tag.outputs.tag_name }}
+
+      - name: Create Forgejo Release
+        id: create_release
+        env:
+          FORGEJO_TOKEN: ${{ secrets.FORGEJO_TOKEN }}
+          TAG_NAME: ${{ steps.time_tag.outputs.tag_name }}
+          RELEASE_TITLE: ${{ steps.time_tag.outputs.release_title }}
+        run: |
+          response=$(curl -s -X POST https://forgejo.sbmc.dev/api/v1/repos/DaTTV/ServerRegisterAPI/releases \
+            -H "Authorization: token $FORGEJO_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "tag_name": "'"$TAG_NAME"'",
+              "name": "'"$RELEASE_TITLE"'",
+              "draft": false,
+              "prerelease": false
+            }')
+
+          echo "$response"
+          release_id=$(echo "$response" | jq -r '.id')
+
+          if [ "$release_id" = "null" ] || [ -z "$release_id" ]; then
+            echo "Failed to create release or extract release ID."
+            exit 1
+          fi
+
+          echo "release_id=$release_id" >> $GITHUB_OUTPUT
+
+      - name: Upload JARs to Forgejo Release
+        env:
+          FORGEJO_TOKEN: ${{ secrets.FORGEJO_TOKEN }}
+          RELEASE_ID: ${{ steps.create_release.outputs.release_id }}
+        run: |
+          for file in build/libs/*.jar; do
+            filename=$(basename "$file")
+            echo "Uploading $filename..."
+            curl -s -X POST "https://forgejo.sbmc.dev/api/v1/repos/DaTTV/ServerRegisterAPI/releases/$RELEASE_ID/assets?name=$filename" \
+              -H "Authorization: token $FORGEJO_TOKEN" \
+              -H "Content-Type: application/java-archive" \
+              --data-binary @"$file"
+          done
