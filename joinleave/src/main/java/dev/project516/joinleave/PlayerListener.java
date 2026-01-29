@@ -1,4 +1,4 @@
-package io.github.project516.joinleave;
+package dev.project516.joinleave;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.event.EventHandler;

@@ -1,4 +1,4 @@
-package io.github.project516.joinleave;
+package dev.project516.joinleave;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;

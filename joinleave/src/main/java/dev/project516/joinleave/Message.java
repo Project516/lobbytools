@@ -1,4 +1,4 @@
-package io.github.project516.joinleave;
+package dev.project516.joinleave;
 
 import java.util.Arrays;
 import java.util.List;
