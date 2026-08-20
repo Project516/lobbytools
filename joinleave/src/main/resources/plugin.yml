@@ -1,6 +1,6 @@
 name: JoinLeave
 version: 1.0.0
-main: dev.joinleave.JoinLeave
+main: dev.project516.joinleave.JoinLeave
 description: A simple Join and Leave plugin
 author: project516
 website: https://project516.dev
