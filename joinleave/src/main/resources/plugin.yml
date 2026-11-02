@@ -4,4 +4,4 @@ main: dev.project516.joinleave.JoinLeave
 description: A simple Join and Leave plugin
 author: project516
 website: https://project516.dev
-api-version: '1.21.11'
+api-version: '26.3'

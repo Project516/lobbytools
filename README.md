@@ -26,8 +26,8 @@ Replaces the default join and leave messages with a randomly selected one from a
 
 ## Requirements
 
-- Java 21 or newer
-- Paper 1.21.11+
+- Java 25 or newer
+- Paper 26.3+
 
 ## Install
 
